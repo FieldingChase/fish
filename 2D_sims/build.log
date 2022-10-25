@@ -1,0 +1,13 @@
+ar -cr libblasLapack.a *.o
+notemp.usr -> notemp.f
+mpif77  -O2 -cpp -fdefault-real-8 -fdefault-double-8 -std=legacy  -DMPI -DUNDERSCORE -DGLOBAL_LONG_LONG -DTIMER -I/Users/ketanmittal/Dropbox/SomandKetan/rotating_particles/2Dstrat -I/Users/ketanmittal/Nek5000/core -I./ -I /Users/ketanmittal/Nek5000/core/experimental  -c /Users/ketanmittal/Dropbox/SomandKetan/rotating_particles/2Dstrat/notemp.f
+building libnek5000.a ... done
+mpif77  -O2 -cpp -fdefault-real-8 -fdefault-double-8 -std=legacy  -DMPI -DUNDERSCORE -DGLOBAL_LONG_LONG -DTIMER -I/Users/ketanmittal/Dropbox/SomandKetan/rotating_particles/2Dstrat -I/Users/ketanmittal/Nek5000/core -I./ -I /Users/ketanmittal/Nek5000/core/experimental -o nek5000 /Users/ketanmittal/Nek5000/core/drive.f /Users/ketanmittal/Dropbox/SomandKetan/rotating_particles/2Dstrat/notemp.o libnek5000.a -L/Users/ketanmittal/Nek5000/3rd_party/blasLapack -lblasLapack -L/Users/ketanmittal/Nek5000/3rd_party/gslib/lib -lgs 
+
+
+#############################################################
+#                  Compilation successful!                  #
+#############################################################
+__TEXT	__DATA	__OBJC	others	dec	hex
+1818624	1460727808	0	4295122944	5757669376	1572f1000	
+

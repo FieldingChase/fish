@@ -1,0 +1,414 @@
+      subroutine uservp(ix,iy,iz,eg) ! set variable properties
+
+c      implicit none
+
+      integer ix,iy,iz,eg
+     
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      integer e
+c     e = gllel(eg)
+
+      udiff  = 0.0
+      utrans = 0.0
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine userf(ix,iy,iz,eg) ! set acceleration term
+c
+c     Note: this is an acceleration term, NOT a force!
+c     Thus, ffx will subsequently be multiplied by rho(x,t).
+c
+c      implicit none
+
+      integer ix,iy,iz,eg
+
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      integer e
+c     e = gllel(eg)
+c
+      Fr2 = 1.0000
+      ffx = 0.0
+c     ffy = (temp - y) / Fr2
+      ffy = 0.0
+      ffz = 0.0
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine userq(ix,iy,iz,eg) ! set source term
+
+c      implicit none
+
+      integer ix,iy,iz,eg
+
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      integer e
+c     e = gllel(eg)
+
+      qvol   = 0.0
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine userbc(ix,iy,iz,iside,eg) ! set up boundary conditions
+      integer ix,iy,iz,iside,eg
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+      include 'NEKNEK'
+
+      ie = gllel(eg)
+      if (imask(ix,iy,iz,ie).eq.0) then
+         if (IFMVBD) then !Moving
+            call u_meshv(x,y,z,ux,uy,uz)
+         else
+           ux=1.
+           uy=0.
+           uz=0.
+         endif
+         temp = y
+      else
+         ux = valint(ix,iy,iz,ie,1)
+         uy = valint(ix,iy,iz,ie,2)
+         uz = valint(ix,iy,iz,ie,ldim)
+         temp = valint(ix,iy,iz,ie,ldim+1)
+      endif
+
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine useric(ix,iy,iz,eg) ! set up initial conditions
+
+c      implicit none
+
+      integer ix,iy,iz,eg
+
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      ux   = 1.0
+      uy   = 0.0
+      uz   = 0.0
+      temp = y
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine userchk()
+      include 'SIZE'
+      include 'TOTAL'
+      common /k10idom/ domid
+      integer e,f,domid
+      common /myoutflow/ d(lx1,ly1,lz1,lelt),m1(lx1*ly1*lz1,lelt)
+      real m1
+      common /ihfpt/ ihndl
+      integer ihndl
+      real rwk
+      integer iwk,npts
+      common /rstdata/ vlasty,vlastz,timelst,atimest,dtimest,vavgy,vavgz
+      real vlasty,vlastz,timelst,atimest,dtimest,vavgy,vavgz
+
+      rq  = 1.
+      uin = 0.
+      call turb_outflow(d,m1,rq,uin)
+
+      ifxyo = .true.
+      scale = 2/(pi/4.)  !scale = 2/(pi*D*D/4)
+      if (istep.eq.0.and.domid.eq.0) call set_obj  ! define objects for surface integrals
+      if (domid.eq.0.and.istep.gt.100) 
+     $      call torque_calc(scale,x0,.true.,.false.)
+    6   format(i8,1p4e19.11,2x,i5,a8)
+      call my_mesh_velocity
+
+      if (mod(istep,10).eq.0) call outpost(vx,vy,vz,pr,t,'   ')
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine userqtl ! Set thermal divergence
+
+      call userqtl_scig 
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine usrdat()   ! This routine to modify element vertices
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKNEK'
+
+      parameter (lbc=10) ! Maximum number of bc types
+      character*3 f2tbc(2,lbc)
+ 
+      f2tbc(1,1) = 'W  '   ! Any 'W  ' bc is swapped to ft2bc(2,1)
+      f2tbc(2,1) = 'I  '
+ 
+      f2tbc(1,2) = 'P  '   ! Any 'W  ' bc is swapped to ft2bc(2,1)
+      f2tbc(2,2) = 'P  '
+
+      f2tbc(1,3) = 'v  '   ! Any 'v  ' bc is swapped to ft2bc(2,2)
+      f2tbc(2,3) = 't  '
+
+      f2tbc(1,4) = 'O  '   ! Any 'v  ' bc is swapped to ft2bc(2,2)
+      f2tbc(2,4) = 'O  '
+ 
+      nbc = 4      ! Number of boundary condition pairings (e.g., W-->t)
+c     call add_temp(f2tbc,nbc,1)
+
+      ngeom = 2
+      ninter = 1
+      nfld_neknek=4
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine usrdat2()  ! This routine to modify mesh coordinates
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+      common /k10idom/ domid
+      integer e,f,domid
+      real rwall,rint
+
+      domid = 1
+      n = lx1*ly1*lz1*nelv
+      xmx = glmax(xm1,n)
+      xmxg = glmax_ms(xm1,n)
+      if (xmx.lt.xmxg) then
+        domid = 0
+        ifusermv = .true.
+        IFMVBD   = .true.
+      endif
+      tol = 1.e-2
+
+      if (domid.eq.0) then !inner mesh
+        rwall = 0.5
+        rint = 2.25
+        nwall = 0
+        nints = 0
+        do e=1,nelv
+        do f=1,2*ldim
+         if (cbc(f,e,1).ne.'E  ') then
+           call facind (i0,i1,j0,j1,k0,k1,lx1,ly1,lz1,f)
+           idx1 = 0
+           idx2 = 0
+           do k=k0,k1
+           do j=j0,j1
+           do i=i0,i1
+              xv = xm1(i,j,k,e)
+              yv = ym1(i,j,k,e)
+              rv = sqrt(xv**2+yv**2)
+              if (abs(rv-rwall).lt.tol) idx1 = idx1+1
+              if (abs(rv-rint).lt.tol) idx2 = idx2+1
+           enddo 
+           enddo 
+           enddo 
+           if (idx1.eq.lx1**1) cbc(f,e,1) = 'mv '
+           if (idx2.eq.lx1**1) cbc(f,e,1) = 'int'
+           if (idx1.eq.lx1**1) cbc(f,e,2) = 'mv '
+           if (idx2.eq.lx1**1) cbc(f,e,2) = 'int'
+           if (idx1.eq.lx1**1) nwall = nwall+1
+           if (idx2.eq.lx1**1) nints = nints+1
+         endif
+        enddo 
+        enddo 
+        nwg = iglsum(nwall,1)
+        nig = iglsum(nints,1)
+      else 
+        nwg = 0
+        rint = 1.75
+        nints = 0
+        do e=1,nelv
+        do f=1,2*ldim
+         if (cbc(f,e,1).ne.'E  ') then
+           call facind (i0,i1,j0,j1,k0,k1,lx1,ly1,lz1,f)
+           idx1 = 0
+           idx2 = 0
+           do k=k0,k1
+           do j=j0,j1
+           do i=i0,i1
+              xv = xm1(i,j,k,e)
+              yv = ym1(i,j,k,e)
+              rv = sqrt(xv**2+yv**2)
+              if (abs(rv-rint).lt.tol) idx2 = idx2+1
+           enddo
+           enddo
+           enddo
+           if (idx2.eq.lx1**1) cbc(f,e,1) = 'int'
+           if (idx2.eq.lx1**1) cbc(f,e,2) = 'int'
+           if (idx2.eq.lx1**1) nints = nints+1
+         endif
+        enddo
+        enddo
+        nig = iglsum(nints,1)
+      endif
+      if (nid.eq.0) write(6,*) domid,nwg,nig,'k10numberofsurface'
+
+      nv = 0
+      nout = 0
+      do e=1,nelv
+      do f=1,2*ldim
+         if (cbc(f,e,1).eq.'v  ') nv=nv+1
+         if (cbc(f,e,1).eq.'O  ') nout=nout+1
+      enddo
+      enddo
+      nvg = iglsum(nv,1)
+      noutg = iglsum(nout,1)
+      if (nid.eq.0) write(6,*) domid,nvg,noutg,'k10numberofinfout'
+
+      vx1 = 0.5 !ax=by=cz=0.5 base_sphere
+      vx2 = 1.0
+      vx3 = 0.5
+      ntot = lx1*ly1*lz1*nelv
+      if (domid.eq.0) then
+        j=1
+        k=1
+        e=1
+        rx1 = 0.5-vx1
+        rx2 = 0.5-vx2
+        rx3 = 0.5-vx3
+        do i=1,ntot
+          xv = xm1(i,j,k,e)
+          yv = ym1(i,j,k,e)
+          zv = zm1(i,j,k,e)
+          if (ldim.eq.3) then
+             rv = sqrt(xv**2+yv**2)
+             rr = sqrt(xv**2+yv**2+zv**2)
+             rf = (rint-rr)/(rint-0.5)
+             thv= atan2(yv,xv)
+             phv= atan2(zv,rv)
+             xm1(i,j,k,e) = xm1(i,j,k,e)-rf*rx1*cos(phv)*cos(thv)
+             ym1(i,j,k,e) = ym1(i,j,k,e)-rf*rx2*cos(phv)*sin(thv)
+             zm1(i,j,k,e) = zm1(i,j,k,e)-rf*rx3*sin(phv)
+          else
+             rv = sqrt(xv**2+yv**2)
+             rf = (rint-rv)/(rint-0.5)
+             thv= atan2(yv,xv)
+             xm1(i,j,k,e) = xm1(i,j,k,e)-rf*rx1*cos(thv)
+             ym1(i,j,k,e) = ym1(i,j,k,e)-rf*rx2*sin(thv)
+          endif
+        enddo
+      endif
+
+      call fix_geom
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine usrdat3()
+
+c      implicit none
+
+      include 'SIZE'
+      include 'TOTAL'
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine my_mesh_velocity
+      include 'SIZE'
+      include 'TOTAL'
+
+      if (IFMVBD) then                        !Moving mesh
+        n=nx1*ny1*nz1*nelv
+        do i=1,n
+           x = xm1(i,1,1,1)
+           y = ym1(i,1,1,1)
+           z = zm1(i,1,1,1)
+           call u_meshv(x,y,z,ux,uy,uz)
+           wx(i,1,1,1) = ux
+           wy(i,1,1,1) = uy
+           wz(i,1,1,1) = uz
+        enddo
+      endif
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine u_meshv(x,y,z,wx,wy,wz)
+      include 'SIZE'
+      real rpm
+
+
+      one          = 1.0
+      pi           = 4.0*atan(one)
+      omega        = -2. !2 rad/s implies omega^* = omega*D/(2*Uinf) = 1
+      rv = sqrt(y**2+x**2)
+      thv = atan2(y,x)
+      wx = -omega*rv*sin(thv)
+      wy =  omega*rv*cos(thv)
+      wz = 0.
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine set_obj  ! define objects for surface integrals
+c
+      include 'SIZE'
+      include 'TOTAL'
+
+      integer e,f,eg
+
+      nobj = 1
+      iobj = 0
+      do ii=nhis+1,nhis+nobj
+         iobj = iobj+1
+         hcode(10,ii) = 'I'
+         hcode( 1,ii) = 'F'
+         hcode( 2,ii) = 'F'
+         hcode( 3,ii) = 'F'
+         lochis(1,ii) = iobj
+      enddo
+      nhis = nhis + nobj
+
+      if (maxobj.lt.nobj) call exitti('increase maxobj in SIZE$',nobj)
+
+      nxyz  = nx1*ny1*nz1
+      nface = 2*ndim
+
+      do e=1,nelv
+      do f=1,nface
+         if (cbc(f,e,1).eq.'mv ') then
+            iobj  = 1
+            if (iobj.gt.0) then
+               nmember(iobj) = nmember(iobj) + 1
+               mem = nmember(iobj)
+               eg  = lglel(e)
+               object(iobj,mem,1) = eg
+               object(iobj,mem,2) = f
+c              write(6,1) iobj,mem,f,eg,e,nid,' OBJ'
+c   1          format(6i9,a4)
+
+            endif
+         endif
+      enddo
+      enddo
+
+      return
+      end
+c-----------------------------------------------------------------------
+
+c automatically added by makenek
+      subroutine usrdat0() 
+
+      return
+      end
+
+c automatically added by makenek
+      subroutine usrsetvert(glo_num,nel,nx,ny,nz) ! to modify glo_num
+      integer*8 glo_num(1)
+
+      return
+      end
