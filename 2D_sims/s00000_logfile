@@ -1,0 +1,363 @@
+/----------------------------------------------------------\\
+|      _   __ ______ __ __  ______  ____   ____   ____     |
+|     / | / // ____// //_/ / ____/ / __ \\/ __ \\/ __ \\   |
+|    /  |/ // __/  / ,<   /___ \\ / / / // / / // / / /    |
+|   / /|  // /___ / /| | ____/ / / /_/ // /_/ // /_/ /     |
+|  /_/ |_//_____//_/ |_|/_____/  \\___/ \\___/ \\___/      |
+|                                                          |
+|----------------------------------------------------------|
+|                                                          |
+| COPYRIGHT (c) 2008-2020 UCHICAGO ARGONNE, LLC            |
+| Version:  20.0-dev                                       |
+| Web:      https://nek5000.mcs.anl.gov                    |
+|                                                          |
+\\----------------------------------------------------------/
+
+ Number of MPI ranks :           1
+  
+ Reading /media/anton/OSDisk/my_own_sims/fish/2D_sims/in.rea                                                                                 
+ partioning elements to MPI ranks
+ Reading /media/anton/OSDisk/my_own_sims/fish/2D_sims/in.map                                                                                 
+ done :: partioning   0.33378E-02 sec
+
+           0  objects found
+ 103   Parameters from file:
+   1      1.00000     p001 DENSITY
+   2     -300.000     p002 VISCOS
+   7      1.00000     p007 RHOCP
+   8      1.00000     p008 CONDUCT
+  11      100.     p011 NSTEPS
+  12    -0.500000E-03 p012 DT
+  15      10.0000     p015 IOSTEP
+  21     0.100000E-05 p021 DIVERGENCE
+  22     0.100000E-07 p022 HELMHOLTZ
+  24     0.100000E-09 p024 TOLREL
+  25     0.100000E-09 p025 TOLABS
+  26      2.00000     p026 COURANT
+  27      3.00000     p027 TORDER
+  59      0.00000     p059
+  65      1.00000     p065 #iofiles (eg, 0 or 64); <0 --> sep. dirs
+  66      6.00000     p066   output : <0=ascii, else binary
+  67      6.00000     p067
+  93      20.0000     p093 Number of previous pressure solns saved
+  94      5.00000     p094 start projecting velocity after p94 step
+  95      5.00000     p095 start projecting pressure after p95 step
+  99      3.00000     p099 dealiasing: <0 off
+ 102      1.00000     p102
+ 103     0.500000E-01 p103 weight of stabilizing filter (.01)
+  
+ done :: read .rea file   0.19064E-01 sec
+
+ nelgt/nelgv/lelt:         512         512        4003
+ lx1/lx2/lx3/lxd:            8           8           8          12
+
+ Reset the target Courant number to .5
+ setup mesh topology
+   Right-handed check complete for         512 elements. OK.
+   setvert2d:   8        6880       25312        6880        6880
+gs_setup: 0 unique labels shared
+   handle bytes (avg, min, max): 163804 163804 163804
+   buffer bytes (avg, min, max): 0 0 0
+   setupds time 3.8013E-03 seconds   0  8        6880         512
+ 
+ 
+ max multiplicity            4
+ done :: setup mesh topology
+  
+ call usrdat
+ done :: usrdat
+
+ generate geometry data
+ done :: generate geometry data
+  
+ call usrdat2
+           0          32          32 k10numberofsurface
+           0           0           0 k10numberofinfout
+  7.5000E-07  3.3789E-06  0.0000E+00  7.5000E-07  3.3789E-06  0.0000E+00 xyz repair 1
+  5.0200E-07  2.6249E-06  0.0000E+00  5.0200E-07  2.6249E-06  0.0000E+00 xyz repair 2
+  6.6174E-24  2.6470E-23  0.0000E+00  6.6174E-24  2.6470E-23  0.0000E+00 xyz repair 3
+ regenerate geometry data           1
+
+
+    0  ERROR:  Vanishing Jacobian near      5th node of element       134.
+  -3.9821975647239970E-005   3.0988174564700006E-004
+    0 xyz:   1.15185E+00  -1.71258E-02
+    0 xyz:   1.17751E+00  -2.73864E-02
+
+
+    0  ERROR:  Vanishing Jacobian near     35th node of element       155.
+  -5.8766803251956296E-005   6.4691952930097385E-004
+    0 xyz:  -1.09705E+00   3.22095E+00
+    0 xyz:  -1.11231E+00   3.14469E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     23th node of element       157.
+  -1.0011665063747177E-004   6.7077055255070420E-004
+    0 xyz:  -1.33854E+00   2.09437E+00
+    0 xyz:  -1.35443E+00   2.02582E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     25th node of element       162.
+  -8.8582345671268069E-004   1.4034978817666251E-004
+    0 xyz:  -6.87257E-01   5.49577E+00
+    0 xyz:  -6.09058E-01   5.98470E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     49th node of element       165.
+   5.4095368725086759E-004  -4.1666578095773260E-004
+    0 xyz:   2.07211E-01   3.42805E+00
+    0 xyz:   2.04061E-01   3.45904E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     24th node of element       167.
+  -8.6499410414259473E-004   1.4109068991732462E-004
+    0 xyz:  -1.81115E+00   4.25734E-01
+    0 xyz:  -1.82284E+00   3.96130E-01
+
+
+    0  ERROR:  Vanishing Jacobian near     17th node of element       176.
+   6.2093446145441912E-004  -1.0866836340166774E-004
+    0 xyz:  -8.35690E-01  -2.38808E-02
+    0 xyz:  -7.65557E-01  -4.64765E-02
+
+
+    0  ERROR:  Vanishing Jacobian near      5th node of element       185.
+  -2.6332690848723111E-004   2.2846789656669891E-004
+    0 xyz:   9.76493E-01   2.09832E-01
+    0 xyz:   9.98247E-01   1.74322E-01
+
+
+    0  ERROR:  Vanishing Jacobian near     14th node of element       188.
+  -2.2103855756076991E-004   9.4945676588888139E-005
+    0 xyz:  -7.99964E-01   4.82544E+00
+    0 xyz:  -8.11786E-01   4.75710E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     41th node of element       191.
+  -4.4658756867831714E-004   4.9238041266926741E-004
+    0 xyz:  -4.55888E-01   6.99199E+00
+    0 xyz:  -4.04182E-01   7.34922E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     33th node of element       220.
+   8.1336967707387720E-004  -9.4326842182718872E-005
+    0 xyz:  -9.92961E-01   4.93308E-03
+    0 xyz:  -9.22215E-01  -1.16012E-02
+
+
+    0  ERROR:  Vanishing Jacobian near     44th node of element       262.
+  -2.3588458523068206E-005   1.0036829951052140E-004
+    0 xyz:  -3.74939E-01   7.55696E+00
+    0 xyz:  -3.81964E-01   7.50705E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     38th node of element       289.
+  -4.2906010813347287E-005   8.4749916361382023E-005
+    0 xyz:  -4.78859E-01   6.83707E+00
+    0 xyz:  -4.86123E-01   6.78809E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     31th node of element       294.
+  -1.7720739756018136E-004   4.0591391667021276E-005
+    0 xyz:  -5.97026E-01   6.06126E+00
+    0 xyz:  -6.05279E-01   6.00875E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     33th node of element       305.
+  -9.4343273623113781E-004   2.2104960168048415E-004
+    0 xyz:  -5.50117E-01   6.35975E+00
+    0 xyz:  -4.93878E-01   6.73578E+00
+
+
+    0  ERROR:  Vanishing Jacobian near      3th node of element       306.
+  -5.0777703311350109E-005   7.3327356121162545E-006
+    0 xyz:  -6.91267E-01  -6.99666E-02
+    0 xyz:  -7.01567E-01  -6.65079E-02
+
+
+    0  ERROR:  Vanishing Jacobian near     57th node of element       308.
+   4.7280139900824627E-004  -7.7391664425176612E-005
+    0 xyz:  -7.58145E-01  -4.61121E-02
+    0 xyz:  -6.86550E-01  -7.15507E-02
+
+
+    0  ERROR:  Vanishing Jacobian near     49th node of element       323.
+   2.4084493497317249E-004  -1.3969818817893045E-004
+    0 xyz:  -6.80526E-01  -7.21545E-02
+    0 xyz:  -6.35863E-01  -8.95712E-02
+
+
+    0  ERROR:  Vanishing Jacobian near     41th node of element       324.
+   3.2726001493870653E-004  -1.1260990370060844E-004
+    0 xyz:  -6.25757E-01  -9.09911E-02
+    0 xyz:  -5.83308E-01  -1.10812E-01
+
+
+    0  ERROR:  Vanishing Jacobian near      3th node of element       326.
+  -4.7239327320502955E-004   1.7838969945709396E-004
+    0 xyz:  -8.38135E-01   4.60584E+00
+    0 xyz:  -8.52687E-01   4.52332E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     43th node of element       327.
+  -5.2056264407381383E-004   1.5746674472372213E-004
+    0 xyz:  -9.66537E-01   3.89634E+00
+    0 xyz:  -9.81468E-01   3.81689E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     53th node of element       328.
+  -4.2463151186339712E-004   5.6054459095201264E-004
+    0 xyz:  -8.79832E-01   4.37059E+00
+    0 xyz:  -9.01766E-01   4.24862E+00
+
+
+    0  ERROR:  Vanishing Jacobian near      5th node of element       360.
+  -1.0013855345831005E-004   2.6173109122096180E-003
+    0 xyz:  -1.45430E+00   1.61430E+00
+    0 xyz:  -1.49056E+00   1.47058E+00
+
+
+    0  ERROR:  Vanishing Jacobian near      4th node of element       362.
+  -1.1830998104876778E-003   1.9668241118004567E-003
+    0 xyz:  -1.87651E+00   2.68018E-01
+    0 xyz:  -1.91168E+00   1.92749E-01
+
+
+    0  ERROR:  Vanishing Jacobian near      2th node of element       363.
+  -1.1522854690479621E-004   1.2202026152601572E-003
+    0 xyz:  -2.06250E+00   2.96357E-16
+    0 xyz:  -2.07452E+00  -1.71464E-09
+
+
+    0  ERROR:  Vanishing Jacobian near     16th node of element       364.
+  -1.0949331250584603E-003   2.2125166747127329E-004
+    0 xyz:  -2.05031E+00   1.76562E-03
+    0 xyz:  -2.06234E+00  -4.81598E-05
+
+
+    0  ERROR:  Vanishing Jacobian near     47th node of element       367.
+  -1.1815898786012684E-003   7.2541534589300530E-004
+    0 xyz:  -1.54775E+00   1.25724E+00
+    0 xyz:  -1.57239E+00   1.16834E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     33th node of element       387.
+   4.3076831944256202E-004  -1.3003744484390108E-005
+    0 xyz:  -5.70464E-01  -1.11151E-01
+    0 xyz:  -5.29486E-01  -1.34726E-01
+
+
+    0  ERROR:  Vanishing Jacobian near     33th node of element       388.
+   2.6715342126037967E-004  -1.8313417105050739E-004
+    0 xyz:  -5.22926E-01  -1.35648E-01
+    0 xyz:  -4.81351E-01  -1.56593E-01
+
+
+    0  ERROR:  Vanishing Jacobian near     17th node of element       393.
+   7.7494282754387005E-004  -1.5311327590815382E-004
+    0 xyz:   2.76000E-01   2.85835E+00
+    0 xyz:   2.72610E-01   2.89293E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     57th node of element       396.
+   6.3710577684451299E-004  -8.2047834540792397E-005
+    0 xyz:   2.41163E-01   3.13266E+00
+    0 xyz:   2.29610E-01   3.23583E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     21th node of element       397.
+  -2.4945434584161541E-004   8.7436938777604029E-005
+    0 xyz:  -7.11231E-01   5.35133E+00
+    0 xyz:  -7.23923E-01   5.27487E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     41th node of element       398.
+   6.1546333045960858E-004  -5.2070528770710965E-004
+    0 xyz:   1.70437E-01   3.78512E+00
+    0 xyz:   1.72676E-01   3.76378E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     25th node of element       401.
+   1.2588881642592066E-003  -3.8365688529440247E-004
+    0 xyz:   5.88444E-01   1.21649E+00
+    0 xyz:   5.71999E-01   1.28823E+00
+
+
+    0  ERROR:  Vanishing Jacobian near      3th node of element       413.
+  -4.8379545912327800E-005   2.5130551223979600E-005
+    0 xyz:   2.30837E-01   3.22550E+00
+    0 xyz:   2.33516E-01   3.20295E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     41th node of element       427.
+   1.2004288008552735E-003  -6.3843458826736907E-004
+    0 xyz:   4.16005E-01   1.98433E+00
+    0 xyz:   4.04398E-01   2.05307E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     25th node of element       428.
+   1.7143021040425142E-003  -2.5010031732846608E-004
+    0 xyz:   3.25035E-01   2.50734E+00
+    0 xyz:   3.17224E-01   2.57834E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     41th node of element       455.
+   2.9917351698975272E-003  -6.4874177939688166E-004
+    0 xyz:   7.31410E-01   7.37580E-01
+    0 xyz:   6.78202E-01   9.17658E-01
+
+
+    0  ERROR:  Vanishing Jacobian near     39th node of element       470.
+  -3.8594114688323674E-005   1.7318652499668781E-004
+    0 xyz:   1.09617E+00  -3.78806E-03
+    0 xyz:   1.11362E+00  -6.38491E-03
+
+
+    0  ERROR:  Vanishing Jacobian near      7th node of element       471.
+  -6.9792644210812677E-005   2.0852644189168308E-004
+    0 xyz:   1.13128E+00   3.85520E-03
+    0 xyz:   1.14744E+00  -1.09049E-02
+
+
+    0  ERROR:  Vanishing Jacobian near     33th node of element       479.
+   2.6252333493328407E-003  -4.7224788819583054E-004
+    0 xyz:   9.49766E-01   2.35347E-01
+    0 xyz:   8.84117E-01   3.83550E-01
+
+
+    0  ERROR:  Vanishing Jacobian near      5th node of element       480.
+  -3.1420400788916523E-004   2.5418523568851610E-004
+    0 xyz:   7.42051E-01   7.29210E-01
+    0 xyz:   7.60551E-01   6.78649E-01
+
+
+    0  ERROR:  Vanishing Jacobian near     49th node of element       481.
+   1.5912363196826469E-003  -1.9580524919766452E-005
+    0 xyz:   4.82668E-01   1.64909E+00
+    0 xyz:   4.63298E-01   1.75614E+00
+
+
+    0  ERROR:  Vanishing Jacobian near      4th node of element       497.
+  -1.3427167193632954E-005   1.9579788098750099E-004
+    0 xyz:   4.80741E-01   1.67423E+00
+    0 xyz:   4.88708E-01   1.63752E+00
+
+
+    0  ERROR:  Vanishing Jacobian near     41th node of element       498.
+   1.9606685543038659E-003  -3.7072778940096222E-005
+    0 xyz:  -1.12161E+00   1.64872E-02
+    0 xyz:  -9.99197E-01  -2.66856E-03
+
+
+    0  ERROR:  Vanishing Jacobian near     25th node of element       509.
+   7.5961685962007484E-004  -9.3727643408716068E-005
+    0 xyz:  -9.13730E-01  -6.13988E-03
+    0 xyz:  -8.44017E-01  -2.64548E-02
+
+        0  0.0000E+00 Write checkpoint
+
+        0  0.0000E+00 OPEN: xyzin.fld01                                                                   
+ Jac error 1, setting p66=4, ifxyo=t
+  
+an error occured: dying ...
+  

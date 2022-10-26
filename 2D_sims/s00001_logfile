@@ -1,0 +1,137 @@
+/----------------------------------------------------------\\
+|      _   __ ______ __ __  ______  ____   ____   ____     |
+|     / | / // ____// //_/ / ____/ / __ \\/ __ \\/ __ \\   |
+|    /  |/ // __/  / ,<   /___ \\ / / / // / / // / / /    |
+|   / /|  // /___ / /| | ____/ / / /_/ // /_/ // /_/ /     |
+|  /_/ |_//_____//_/ |_|/_____/  \\___/ \\___/ \\___/      |
+|                                                          |
+|----------------------------------------------------------|
+|                                                          |
+| COPYRIGHT (c) 2008-2020 UCHICAGO ARGONNE, LLC            |
+| Version:  20.0-dev                                       |
+| Web:      https://nek5000.mcs.anl.gov                    |
+|                                                          |
+\\----------------------------------------------------------/
+
+ Number of MPI ranks :           1
+  
+ Reading /media/anton/OSDisk/my_own_sims/fish/2D_sims/out.rea                                                                                
+ partioning elements to MPI ranks
+ Reading /media/anton/OSDisk/my_own_sims/fish/2D_sims/out.map                                                                                
+ done :: partioning   0.28328E-02 sec
+
+           0  objects found
+ 103   Parameters from file:
+   1      1.00000     p001 DENSITY
+   2     -300.000     p002 VISCOS
+   7      1.00000     p007 RHOCP
+   8      1.00000     p008 CONDUCT
+  11      100.     p011 NSTEPS
+  12    -0.500000E-03 p012 DT
+  15      10.0000     p015 IOSTEP
+  21     0.100000E-05 p021 DIVERGENCE
+  22     0.100000E-07 p022 HELMHOLTZ
+  24     0.100000E-09 p024 TOLREL
+  25     0.100000E-09 p025 TOLABS
+  26      2.00000     p026 COURANT
+  27      3.00000     p027 TORDER
+  59      0.00000     p059
+  65      1.00000     p065 #iofiles (eg, 0 or 64); <0 --> sep. dirs
+  66      6.00000     p066 6 6    output : <0=ascii, else binary
+  67      6.00000     p067
+  93      20.0000     p093 Number of previous pressure solns saved
+  94      5.00000     p094 start projecting velocity after p94 step
+  95      5.00000     p095 start projecting pressure after p95 step
+  99      3.00000     p099 dealiasing: <0 off
+ 102      1.00000     p102
+ 103     0.500000E-01 p103 weight of stabilizing filter (.01)
+  
+ done :: read .rea file   0.22625E-01 sec
+
+ nelgt/nelgv/lelt:        1088        1088        4003
+ lx1/lx2/lx3/lxd:            8           8           8          12
+
+ Reset the target Courant number to .5
+ setup mesh topology
+   Right-handed check complete for        1088 elements. OK.
+   setvert2d:   8       14423       53591       14423       14423
+gs_setup: 0 unique labels shared
+   handle bytes (avg, min, max): 351636 351636 351636
+   buffer bytes (avg, min, max): 0 0 0
+   setupds time 6.8110E-03 seconds   0  8       14423        1088
+ 
+ 
+ max multiplicity            5
+ done :: setup mesh topology
+  
+ call usrdat
+ done :: usrdat
+
+ generate geometry data
+ done :: generate geometry data
+  
+ call usrdat2
+           1           0          32 k10numberofsurface
+           1          24          24 k10numberofinfout
+  4.7810E-06  4.7810E-06  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00 xyz repair 1
+  4.7810E-06  4.7810E-06  0.0000E+00  4.7810E-06  4.7810E-06  0.0000E+00 xyz repair 2
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00 xyz repair 3
+ regenerate geometry data           1
+ done :: regenerate geometry data           1
+  
+ done :: usrdat2
+
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00 xyz repair 1
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00 xyz repair 2
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00 xyz repair 3
+ regenerate geometry data           1
+ done :: regenerate geometry data           1
+  
+ verify mesh topology
+  -8.0000000000000000        24.000000000000000       Xrange
+  -10.199999999999999        10.199999999999999       Yrange
+   0.0000000000000000        0.0000000000000000       Zrange
+ done :: verify mesh topology
+  
+ mesh metrics:
+ GLL grid spacing min/max    : 6.41E-03 3.10E-01
+ scaled Jacobian  min/max/avg: 6.82E-01 1.00E+00 9.50E-01
+ aspect ratio     min/max/avg: 1.00E+00 1.48E+01 2.90E+00
+
+ IFTRAN    = T
+ IFFLOW    = T
+ IFHEAT    = F
+ IFSPLIT   = T
+ IFLOMACH  = F
+ IFUSERVP  = F
+ IFUSERMV  = F
+ IFPERT    = F
+ IFADJ     = F
+ IFSTRS    = F
+ IFCHAR    = F
+ IFCYCLIC  = F
+ IFAXIS    = F
+ IFMVBD    = F
+ IFMELT    = F
+ IFNEKNEK  = T
+ IFNEKNEKC = T
+ IFSYNC    = F
+   
+ IFVCOR    = F
+ IFINTQ    = F
+ IFGEOM    = F
+ IFSURT    = F
+ IFWCNO    = F
+   
+ IFTMSH for field           1    =  F
+ IFADVC for field           1    =  T
+ IFNONL for field           1    =  F
+   
+ Dealiasing enabled, nxd=          12
+ setup neknek
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00 xyz repair 1
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00 xyz repair 2
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00 xyz repair 3
+ regenerate geometry data           1
+ done :: regenerate geometry data           1
+  
