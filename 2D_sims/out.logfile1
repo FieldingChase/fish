@@ -18,7 +18,7 @@
  Reading /media/anton/OSDisk/my_own_sims/fish/2D_sims/out.rea                                                                                
  partioning elements to MPI ranks
  Reading /media/anton/OSDisk/my_own_sims/fish/2D_sims/out.map                                                                                
- done :: partioning   0.63577E-02 sec
+ done :: partioning   0.28328E-02 sec
 
            0  objects found
  103   Parameters from file:
@@ -46,7 +46,7 @@
  102      1.00000     p102
  103     0.500000E-01 p103 weight of stabilizing filter (.01)
   
- done :: read .rea file   0.25507E-01 sec
+ done :: read .rea file   0.22625E-01 sec
 
  nelgt/nelgv/lelt:        1088        1088        4003
  lx1/lx2/lx3/lxd:            8           8           8          12
@@ -58,7 +58,7 @@
 gs_setup: 0 unique labels shared
    handle bytes (avg, min, max): 351636 351636 351636
    buffer bytes (avg, min, max): 0 0 0
-   setupds time 5.0659E-03 seconds   0  8       14423        1088
+   setupds time 6.8110E-03 seconds   0  8       14423        1088
  
  
  max multiplicity            5

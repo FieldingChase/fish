@@ -268,10 +268,13 @@ c-----------------------------------------------------------------------
       noutg = iglsum(nout,1)
       if (nid.eq.0) write(6,*) domid,nvg,noutg,'k10numberofinfout'
 
-      A3 = -0.2 !Polynomial approximation of NACA 0012
-      A2 = 0.8
-      A1 = -1.2
-      A0 = 1.0 
+
+      one          = 1.0
+      pi           = 4.0*atan(one)
+      A3 = 0.263 !Polynomial approximation of NACA 0012
+      A2 = -0.185
+      A1 = -0.0776
+      A0 = 0.0561 
       vx1 = 0.5 !ax=by=cz=0.5 base_sphere
       vx2 = 1.0
       vx3 = 0.5
@@ -300,11 +303,8 @@ c        rx2 = 0.5-vx2
              rv = sqrt(xv**2+yv**2)
              rf = (rint-rv)/(rint-0.5)
              thv= atan2(yv,xv)
-             if (thv.ge.0) then
-	        rx2 = 0.5-(A3*thv**3+A2*thv**2+A1*thv+A0)
-             else
-            	rx2 = 0.5+(A3*thv**3+A2*thv**2+A1*thv+A0)
- 	     endif
+	     pol_Y = A3*xv**3+A2*xv**2+A1*xv+A0
+             rx2 = 0.5 - (pol_Y) 
              xm1(i,j,k,e) = xm1(i,j,k,e)-rf*rx1*cos(thv)
              ym1(i,j,k,e) = ym1(i,j,k,e)-rf*rx2*sin(thv)
           endif

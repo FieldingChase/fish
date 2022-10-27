@@ -235,7 +235,6 @@ mpif77 -c  -O2 -cpp -fdefault-real-8 -fdefault-double-8 -w -std=legacy  -DMPI -D
 mpif77 -c  -O2 -cpp -fdefault-real-8 -fdefault-double-8 -w -std=legacy  -DMPI -DUNDERSCORE -DGLOBAL_LONG_LONG -DTIMER -I/media/anton/OSDisk/my_own_sims/fish/2D_sims -I/home/anton/Nek5000/core -I./  -I /home/anton/Nek5000/core/experimental /home/anton/Nek5000/core/reader_re2.f -o obj/reader_re2.o
 mpicc -c  -O2  -DMPI -DUNDERSCORE -DGLOBAL_LONG_LONG -DTIMER -I/home/anton/Nek5000/core -I./  -I /home/anton/Nek5000/core/experimental  /home/anton/Nek5000/core/3rd_party/finiparser.c -o obj/finiparser.o
 mpicc -c  -O2  -DMPI -DUNDERSCORE -DGLOBAL_LONG_LONG -DTIMER -I/home/anton/Nek5000/core -I./  -I /home/anton/Nek5000/core/experimental  /home/anton/Nek5000/core/3rd_party/iniparser.c -o obj/iniparser.o
-mpicc -c  -O2  -DMPI -DUNDERSCORE -DGLOBAL_LONG_LONG -DTIMER -I/home/anton/Nek5000/core -I./  -I /home/anton/Nek5000/core/experimental  /home/anton/Nek5000/core/3rd_party/dictionary.c -o obj/dictionary.o
 /home/anton/Nek5000/core/3rd_party/iniparser.c: In function ‘iniparser_load’:
 /home/anton/Nek5000/core/3rd_party/iniparser.c:718:32: warning: ‘__builtin___sprintf_chk’ may write a terminating nul past the end of the destination [-Wformat-overflow=]
   718 |             sprintf(tmp, "%s:%s", section, key);
@@ -250,6 +249,7 @@ In file included from /usr/include/stdio.h:894,
       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    40 |                                   __va_arg_pack ());
       |                                   ~~~~~~~~~~~~~~~~~
+mpicc -c  -O2  -DMPI -DUNDERSCORE -DGLOBAL_LONG_LONG -DTIMER -I/home/anton/Nek5000/core -I./  -I /home/anton/Nek5000/core/experimental  /home/anton/Nek5000/core/3rd_party/dictionary.c -o obj/dictionary.o
 mpif77 -c  -O2 -cpp -fdefault-real-8 -fdefault-double-8 -w -std=legacy  -DMPI -DUNDERSCORE -DGLOBAL_LONG_LONG -DTIMER -I/media/anton/OSDisk/my_own_sims/fish/2D_sims -I/home/anton/Nek5000/core -I./  -I /home/anton/Nek5000/core/experimental /home/anton/Nek5000/core/hpf.f -o obj/hpf.o
 mpicc -c  -O2  -DMPI -DUNDERSCORE -DGLOBAL_LONG_LONG -DTIMER -I/home/anton/Nek5000/core -I./  -I /home/anton/Nek5000/core/experimental -I/home/anton/Nek5000/3rd_party/gslib/include  /home/anton/Nek5000/core/fcrs.c -o obj/fcrs.o
 mpicc -c  -O2  -DMPI -DUNDERSCORE -DGLOBAL_LONG_LONG -DTIMER -I/home/anton/Nek5000/core -I./  -I /home/anton/Nek5000/core/experimental -I/home/anton/Nek5000/3rd_party/gslib/include /home/anton/Nek5000/core/crs_xxt.c -o obj/crs_xxt.o
@@ -269,5 +269,5 @@ mpif77  -O2 -cpp -fdefault-real-8 -fdefault-double-8 -w -std=legacy  -DMPI -DUND
 #                  Compilation successful!                  #
 #############################################################
    text	   data	    bss	    dec	    hex	filename
-1679827	  36944	1452639936	1454356707	56afb8e3	nek5000
+1679787	  36944	1452639936	1454356667	56afb8bb	nek5000
 
