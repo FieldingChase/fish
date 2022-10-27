@@ -269,5 +269,5 @@ mpif77  -O2 -cpp -fdefault-real-8 -fdefault-double-8 -w -std=legacy  -DMPI -DUND
 #                  Compilation successful!                  #
 #############################################################
    text	   data	    bss	    dec	    hex	filename
-1679787	  36944	1452639936	1454356667	56afb8bb	nek5000
+1679835	  36944	1452639936	1454356715	56afb8eb	nek5000
 

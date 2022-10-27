@@ -348,12 +348,14 @@ c-----------------------------------------------------------------------
 c-----------------------------------------------------------------------
       subroutine u_meshv(x,y,z,wx,wy,wz)
       include 'SIZE'
+      include 'TSTEP'
       real rpm
-
 
       one          = 1.0
       pi           = 4.0*atan(one)
-      omega        = 0. !2 rad/s implies omega^* = omega*D/(2*Uinf) = 1
+      om = 1.0
+      A = 0.1
+      omega        = A*cos(om * time) !2 rad/s implies omega^* = omega*D/(2*Uinf) = 1
       rv = sqrt(y**2+x**2)
       thv = atan2(y,x)
       wx = -omega*rv*sin(thv)
